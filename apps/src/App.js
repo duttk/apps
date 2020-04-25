@@ -13,18 +13,20 @@ class Home extends React.Component {
   }
 
   handleSubmit() {
-    console.log("Hello World");
-    console.log(this.state);
     this.setState({
       submitted: true
     });
-    // fetch()
-    // .then(function(response) {
-    //   console.log(response.text);
-    // })
-    // .catch(function(error) {
-    //     console.log(error);
-    // });
+    var url = VERCEL_URL + '/api/hello'
+    fetch(url)
+    .then((response) => {
+      return response.text()
+    })
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((error) => {
+        console.log(error);
+    });
   }
 
   render() {
