@@ -1,14 +1,16 @@
-import responder
+import web
 
-api = responder.API(
-    static_dir=None,
-    template_dir=None,
+urls = (
+    '/api/hello', 'hello'
 )
+app = web.application(urls, globals())
 
-@api.route('/api/hello')
-async def say_hello(req, resp):
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    resp.text = f'Hello, world!'
+class hello:
+    def GET(self):
+        web.header('Access-Control-Allow-Origin', '*')
+        return {
+            'data': 'Hello, World!'
+        }
 
-if __name__ == '__main__':
-    api.run()
+if __name__ == "__main__":
+    app.run()

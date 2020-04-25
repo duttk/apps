@@ -12,11 +12,12 @@ class Home extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     this.setState({
       submitted: true
     });
-    // var url = 'http://127.0.0.1:5042' + '/api/hello'
+    // var url = 'http://0.0.0.0:8080' + '/api/hello'
     var url = window.location.href + '/api/hello'
     console.log(url)
     fetch(url)
