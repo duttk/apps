@@ -16,7 +16,7 @@ class Home extends React.Component {
     this.setState({
       submitted: true
     });
-    var url = VERCEL_URL + '/api/hello'
+    var url = window.location.href + '/api/hello'
     fetch(url)
     .then((response) => {
       return response.text()
