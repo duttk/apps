@@ -4,6 +4,7 @@ urls = (
     '/api/hello', 'hello'
 )
 app = web.application(urls, globals())
+app.__call__ = app.run
 
 class hello:
     def GET(self):
@@ -12,5 +13,5 @@ class hello:
             'data': 'Hello, World!'
         }
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
