@@ -1,6 +1,9 @@
 import responder
 
-api = responder.API()
+api = responder.API(
+    static_dir=None,
+    template_dir=None,
+)
 
 @api.route('/api/hello')
 async def say_hello(req, resp):
