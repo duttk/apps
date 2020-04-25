@@ -17,6 +17,7 @@ class Home extends React.Component {
       submitted: true
     });
     var url = window.location.href + '/api/hello'
+    console.log(url)
     fetch(url)
     .then((response) => {
       return response.text()
