@@ -1,12 +1,11 @@
-from http.server import BaseHTTPRequestHandler
+import responder
 
-class handler(BaseHTTPRequestHandler):
+api = responder.API()
 
-  def do_GET(self):
-    self.send_response(200)
-    self.send_header('Content-type', 'text/plain')
-    self.send_header('Access-Control-Allow-Origin', '*')
-    self.end_headers()
-    self.wfile.write('Hello from Python'.encode())
-    return
+@api.route('/api/hello')
+async def say_hello(req, resp):
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.text = f'Hello, world!'
 
+if __name__ == '__main__':
+    api.run()
