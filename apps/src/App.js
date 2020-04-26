@@ -17,7 +17,7 @@ class Home extends React.Component {
     this.setState({
       submitted: true
     });
-    // var url = 'http://0.0.0.0:8080' + '/api/hello'
+    // var url = 'http://127.0.0.1:5000' + '/api/hello'
     var url = window.location.href + '/api/hello'
     console.log(url)
     fetch(url)
