@@ -210,7 +210,7 @@ virtualenv==16.1.0
 w3lib==1.21.0
 wcwidth==0.1.9
 webencodings==0.5.1
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 whichcraft==0.5.2
 widgetsnbextension==3.1.0
 wrapt==1.10.11
