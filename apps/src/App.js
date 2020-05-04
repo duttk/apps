@@ -1,35 +1,21 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import FileUpload from './FileUpload';
+import Display from './Display';
+
 
 class Home extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      submitted: false
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
+      prediction: null
+    }
+    this.setResult = this.setResult.bind(this)
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.setState({
-      submitted: true
-    });
-    // var url = 'http://127.0.0.1:5000' + '/api/hello'
-    var url = window.location.href + '/api/hello'
-    console.log(url)
-    fetch(url)
-    .then((response) => {
-      return response.text()
-    })
-    .then((data) => {
-      console.log(data)
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+  setResult(val) {
+    this.setState({prediction: val})
   }
 
   render() {
@@ -37,15 +23,21 @@ class Home extends React.Component {
       <div className="App">
         <header className="App-header">
           <p>
-            This is a cool app
+            Upload an image of a Kannada numeral
           </p>
-          <form onSubmit={this.handleSubmit}>
-            <Button type="submit" variant="primary" className="submitButton">Send</Button>
-          </form>
+          <div>
+            <FileUpload 
+              setResult={this.setResult}
+            />
+          </div>
+          {this.state.prediction? (
+            <Display prediction={this.state.prediction}/>
+          ) :(null)}
+          
         </header>
       </div>
-    );
+    )
   }
 }
 
-export default Home;
+export default Home
