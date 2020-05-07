@@ -18,8 +18,8 @@ class FileUpload extends React.Component {
       const data = new FormData()
       data.append('file', this.uploadInput.files[0])
 
-      const url = 'http://127.0.0.1:5000' + '/api/numeral'
-      // const url = window.location.href + '/api/numeral'
+    //   const url = 'http://127.0.0.1:5000' + '/api/numeral'
+      const url = window.location.href + '/api/numeral'
       fetch(url, {
         method: 'POST',
         body: data
