@@ -4,7 +4,7 @@ from fastai.vision import load_learner, open_image
 from werkzeug.datastructures import Headers
 app = Flask(__name__)
 
-MODEL = './api'
+MODEL = './'
 
 @app.route('/', defaults={'path': ''})
 @app.route('/api/numeral', methods=['POST'])
@@ -23,3 +23,6 @@ def numeral():
         'prediction': learn.data.classes[pred_idx]
     })
     return response
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')

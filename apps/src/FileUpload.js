@@ -18,26 +18,26 @@ class FileUpload extends React.Component {
       const data = new FormData()
       data.append('file', this.uploadInput.files[0])
 
-    //   const url = 'http://127.0.0.1:5000' + '/api/numeral'
-      const url = window.location.href + '/api/numeral'
+      const url = 'http://127.0.0.1:5000' + '/api/numeral'
+      //const url = window.location.href + '/api/numeral'
       fetch(url, {
         method: 'POST',
         body: data
       })
       .then((response) => {
           this.setState({
-              uploadStatus: true 
+              uploadStatus: true
           })
           return response.json()
       })
       .then((data) => {
           this.props.setResult(data.prediction)
-      }) 
+      })
       .catch((error) => {
           console.log(error)
       })
     }
-    
+
     render() {
         return(
             <div>
@@ -46,7 +46,7 @@ class FileUpload extends React.Component {
                 <input className="form-control"  ref={(ref) => { this.uploadInput = ref }} type="file" />
                 </div>
                 <button className="btn btn-success" type>Upload</button>
-    
+
             </form>
             </div>
         )

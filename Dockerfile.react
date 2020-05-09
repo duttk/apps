@@ -1,0 +1,21 @@
+# pull official base image
+FROM node:11.10.1
+# set working directory
+WORKDIR /frontend
+
+EXPOSE 3000
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /frontend/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY apps/package.json ./
+COPY apps/package-lock.json ./
+RUN npm install
+
+# add app
+COPY ./apps/ ./
+
+# start app
+CMD ["npm", "start"]
+
