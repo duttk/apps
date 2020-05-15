@@ -3,17 +3,27 @@ FROM ubuntu:18.04
 # set working directory
 WORKDIR /backend
 
-EXPOSE 5000
+# Google app engine only works with port 8080
+EXPOSE 8080
 
+# Copy the requirements file setup the env
 COPY apps/requirements.txt ./requirements.txt
 
-RUN apt-get update -y && apt-get install -y python3.7 python3-pip
+# Gotta get python
+RUN apt-get update -y 
+RUN apt-get install -y locales python3.7 python3-pip
+
+# This is a workaround to get flask to run
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y locales && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && dpkg-reconfigure --frontend=noninteractive locales && update-locale LANG=en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+# Using a cache dir blows up the disk and the process could get killed from lack of space
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-ENV FLASK_APP=api/numeral.py
 # add app
 COPY ./apps/api/ ./
 
 # start app
-CMD ["flask", "run", "--host", "0.0.0.0"]
+CMD ["python3", "numeral.py"]
 
